@@ -191,10 +191,11 @@ echo "🚀 Starting CR-ITSKILL-001 Execution..."
 # Package.json Rebranding (Specialized Script)
 python3 "$SCRIPT_DIR/rebrand_package_json.py" "$TARGET_PATH"
 
-# README Rebranding
-apply_payload "README.md" "rebrand_readme@v1.0" "# arra-oracle-skills-cli" "rebrand_readme@v1.0.pl" "replace_block" 'npx arra-oracle-skills@26.5.16 install -g -y --agent claude-code'
+# README Rebranding (High-Quality Final)
+python3 "$SCRIPT_DIR/rebrand_final_readme.py" "$TARGET_PATH"
 
-# Install.sh Rebranding
+# Install.sh Rebranding (Strict Mode)
+
 apply_payload "install.sh" "rebrand_install_sh_header@v1.0" "#!/bin/bash" "rebrand_install_sh_header@v1.0.pl" "replace_block" 'echo ""'
 apply_payload "install.sh" "rebrand_install_sh_paths@v1.0" 'INSTALL_DIR="$HOME/.oracle-skills/bin"' "rebrand_install_sh_paths@v1.0.pl" "replace_block" '  export PATH="$INSTALL_DIR:$PATH"'
 
