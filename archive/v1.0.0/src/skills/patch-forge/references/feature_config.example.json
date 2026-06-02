@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "schema_version": "2.1.0",
+    "timestamp": "2026-05-28T13:57:00Z",
+    "client_version": "8.1.5"
+  },
+  "features": {
+    "advanced_calculation": { "enabled": true, "mode": "strict" },
+    "legacy_pulse_check": { "enabled": false }
+  },
+  "data": {
+    "add_parameters": {
+      "base_value": 100,
+      "tax_rate": 0.07
+    }
+  }
+}

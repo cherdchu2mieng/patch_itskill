@@ -1,0 +1,45 @@
+{
+  "project": "Pulse CLI",
+  "current_active_version": "v8.5.0",
+  "timestamp": "2026-05-28T13:57:00Z",
+  "history": {
+    "v8.0": {
+      "description": "เวอร์ชันเริ่มต้นดั้งเดิม (Base เสถียรสุด สำหรับ Reset)",
+      "patch_type": "full_package",
+      "source_dir": "src/versions/v8.0",
+      "files_mapping": [
+        { "src": "add.ts", "dest": "src/commands/add.ts" },
+        { "src": "config.ts", "dest": "src/config.ts" },
+        { "src": "pulse.ts", "dest": "src/pulse.ts" }
+      ],
+      "features": {
+        "advanced_calculation": { "enabled": true, "mode": "strict" },
+        "legacy_pulse_check": { "enabled": false }
+      },
+      "data": {
+        "add_parameters": {
+          "base_value": 100,
+          "tax_rate": 0.07
+        }
+      }
+    },
+    "v8.4.2r6": {
+      "description": "อัปเดตระบบ Workspace คอนฟิก และ Authority ของ Blog",
+      "patch_type": "full_package",
+      "source_dir": "src/versions/v8.4.2r6",
+      "files_mapping": [
+        { "src": "add.ts", "dest": "src/commands/add.ts" },
+        { "src": "config.ts", "dest": "src/config.ts" },
+        { "src": "pulse.ts", "dest": "src/pulse.ts" }
+      ]
+    },
+    "v8.5.0": {
+      "description": "ปรับปรุงลอจิก add.ts เพื่อรองรับการเรียกใช้ AI API (Gemini/GPT)",
+      "patch_type": "single_patch",
+      "source_dir": "src/versions/v8.5.0",
+      "files_mapping": [
+        { "src": "add.ts", "dest": "src/commands/add.ts" }
+      ]
+    }
+  }
+}

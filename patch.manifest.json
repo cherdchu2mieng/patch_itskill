@@ -1,0 +1,29 @@
+{
+  "project": "IT-Skill CLI",
+  "current_active_version": "v1.0.0",
+  "timestamp": "2026-06-02T15:10:00Z",
+  "history": {
+    "v1.0.0": {
+      "description": "Genesis Release: Repository Migration and Rebranding",
+      "patch_type": "full_package",
+      "source_baseline": "ψ/learn/Soul-Brews-Studio/arra-oracle-skills-cli/origin/",
+      "features": {
+        "rebranding": {
+          "package_name": "it-skill-cli",
+          "binary_name": "it-skill",
+          "org": "itinfosv",
+          "tag": "[itinfosv]"
+        }
+      },
+      "v1.1.0": {
+      "description": "Skill Integration: Porting Governance Skills",
+      "patch_type": "incremental",
+      "features": {
+        "skill_porting": [
+          "build-rfc", "build-patch", "close-rfc", "patch-forge"
+        ],
+        "profile_update": "src/profiles.ts"
+      }
+    }
+  }
+}
