@@ -10,12 +10,11 @@ Enterprise-grade skill management and lifecycle governance for the `itinfosv` fl
 
 ## 🚀 Fleet Status & Announcements
 
-### v1.0.0 (Genesis Release) — 2026-06-02
-**"AUTHORITATIVE GOVERNANCE LOCKED"** 🛡️
-- **Rebranding Complete**: Transitioned to `itinfosv` organization identity.
-- **Core Integrated Skills**: `build-rfc`, `build-patch`, `close-rfc`, `patch-forge`.
-- **Strict Mode Active**: All legacy `arra-oracle` skills removed for 100% precision.
-- **Ironclad Standard**: Fully compliant with Architecture v3.0.
+### v1.0.1 (Alignment Release) — 2026-06-04
+**"INSTALLATION ALIGNED"** 🛡️
+- **Command Standardized**: Primary command is now `it-skill`.
+- **Lightweight Distribution**: Switched to Bash wrapper (bunx-based) to replace large binaries.
+- **Path Aligned**: Installation directory moved to `~/.it-skill/bin`.
 
 ---
 
@@ -25,13 +24,13 @@ Enterprise-grade skill management and lifecycle governance for the `itinfosv` fl
 Install the IT-Skill CLI to your system to manage governance skills across all projects.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/itinfosv/it-skill-cli/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/cherdchu2mieng/itinfosv-skill-cli/main/install.sh | bash
 ```
 
 After installation, you can verify it by running:
 ```bash
 it-skill --version
-# Expected: 1.0.0
+# Expected: 1.0.1
 ```
 
 ### Bootstrap Governance Skills
@@ -47,8 +46,8 @@ it-skill go standard
 For developers wishing to contribute or inspect the source:
 
 ```bash
-ghq get itinfosv/it-skill-cli
-cd $(ghq list -p itinfosv/it-skill-cli)
+ghq get cherdchu2mieng/itinfosv-skill-cli
+cd $(ghq list -p cherdchu2mieng/itinfosv-skill-cli)
 ```
 
 ### Local Build

@@ -10,7 +10,7 @@ with open(package_json_path, "r") as f:
 
 # Rebranding
 data["name"] = "it-skill-cli"
-data["version"] = "1.0.0"
+data["version"] = "1.0.1"
 data["description"] = "IT-Skill CLI — Enterprise Governance and Skill Management for itinfosv"
 data["bin"] = {
     "it-skill": "./src/cli/index.ts"
@@ -18,12 +18,12 @@ data["bin"] = {
 data["author"] = "itinfosv"
 data["repository"] = {
     "type": "git",
-    "url": "git+https://github.com/itinfosv/it-skill-cli.git"
+    "url": "git+https://github.com/cherdchu2mieng/itinfosv-skill-cli.git"
 }
 data["bugs"] = {
-    "url": "https://github.com/itinfosv/it-skill-cli/issues"
+    "url": "https://github.com/cherdchu2mieng/itinfosv-skill-cli/issues"
 }
-data["homepage"] = "https://github.com/itinfosv/it-skill-cli#readme"
+data["homepage"] = "https://github.com/cherdchu2mieng/itinfosv-skill-cli#readme"
 data["skillTag"] = "[itinfosv]"
 
 # Manifest Tag
