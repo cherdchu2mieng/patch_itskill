@@ -1,0 +1,15 @@
+{
+  "project": "Pulse CLI",
+  "current_active_version": "v8.5.0",
+  "timestamp": "2026-06-04T13:30:00Z",
+  "history": {
+    "v8.5.1": {
+      "description": "Dynamic Identity Alignment: Removing hardcoded 'gemi'",
+      "patch_type": "incremental",
+      "features": {
+        "dynamic_auth": ["config.ts", "triage.ts"],
+        "dynamic_defaults": ["chb.ts", "init.ts"]
+      }
+    }
+  }
+}

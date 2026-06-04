@@ -1,0 +1,1 @@
+    const orchestratorOracle = (await ask(rl, `Orchestrator Oracle (ชื่อ Oracle ผู้ประสานงาน - e.g. ${user}): `)).trim();
