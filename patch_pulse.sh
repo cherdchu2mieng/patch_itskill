@@ -63,10 +63,10 @@ target_repo_path = os.environ.get("TARGET_PATH")
 payloads_dir = os.environ.get("PAYLOADS_DIR")
 target_file = os.environ.get("T_FILE")
 tag = os.environ.get("T_TAG")
-start = os.environ.get("T_START")
+start = os.environ.get("T_START").replace("\\n", "\n")
 payload_name = os.environ.get("T_PAYLOAD")
 mode = os.environ.get("T_MODE")
-end = os.environ.get("T_END")
+end = os.environ.get("T_END").replace("\\n", "\n") if os.environ.get("T_END") else None
 
 path = os.path.join(target_repo_path, target_file)
 payload_path = os.path.join(payloads_dir, payload_name)
@@ -145,7 +145,7 @@ PY_EOF
 }
 
 # 3. PATCH SEQUENCES
-apply_payload "packages/cli/src/config.ts" "config_auth_dynamic@v8.5.1" "export function enforceAuth() {" "config_auth_dynamic@v8.5.1.pl" "replace_block" "  }\n}"
+apply_payload "packages/cli/src/config.ts" "config_auth_dynamic@v8.5.1" "export function enforceAuth() {" "config_auth_dynamic@v8.5.1.pl" "replace_block" "\n}"
 
 apply_payload "packages/cli/src/commands/triage.ts" "triage_liberation@v8.5.1" "  enforceAuth();\n" "triage_liberation@v8.5.1.pl" "replace_line"
 
