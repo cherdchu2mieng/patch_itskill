@@ -1,7 +1,7 @@
 INSTALL_DIR="$HOME/.it-skill/bin"
-BINARY_NAME="it-skill-${PLATFORM}"
-BINARY_URL="https://github.com/itinfosv/it-skill-cli/releases/download/${IT_SKILL_VERSION}/${BINARY_NAME}"
-PKG_SPEC="it-skill-cli@github:itinfosv/it-skill-cli#${IT_SKILL_VERSION}"
+BINARY_NAME="it-skill"
+BINARY_URL="https://github.com/cherdchu2mieng/itinfosv-skill-cli/releases/download/${ITINFOSV_VERSION}/${BINARY_NAME}"
+PKG_SPEC="it-skill@github:cherdchu2mieng/itinfosv-skill-cli#main"
 
 ensure_path() {
   mkdir -p "$INSTALL_DIR"

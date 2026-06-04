@@ -5,54 +5,85 @@ import re
 target_path = sys.argv[1]
 install_sh_path = os.path.join(target_path, "install.sh")
 
+if not os.path.exists(install_sh_path):
+    print(f"⚠️ install.sh not found in {target_path}")
+    sys.exit(0)
+
 with open(install_sh_path, "r") as f:
     content = f.read()
 
-# 1. Update Version Detection and Paths
-content = content.replace(
-    'ITINFOSV_VERSION=$(curl -s https://api.github.com/repos/cherdchu2mieng/itinfosv-skill-cli/releases/latest 2>/dev/null | grep \'"tag_name"\' | cut -d\'"\' -f4)',
-    'ITINFOSV_VERSION="v1.0.1" # Locked for Alignment Phase'
-)
-content = content.replace(
-    'INSTALL_DIR="$HOME/.itinfosv-skills/bin"',
-    'INSTALL_DIR="$HOME/.it-skill/bin"'
-)
-content = content.replace(
-    'BINARY_NAME="itinfosv-skills-${PLATFORM}"',
-    'BINARY_NAME="it-skill"'
-)
-content = content.replace(
-    'PKG_SPEC="itinfosv-skills@github:cherdchu2mieng/itinfosv-skill-cli#main"',
-    'PKG_SPEC="it-skill@github:cherdchu2mieng/itinfosv-skill-cli#main"'
-)
+# 1. Broad Branding for the whole file
+content = content.replace('Oracle Skills', 'IT-Skill CLI')
+content = content.replace('oracle-skills', 'it-skill')
+content = content.replace('.oracle-skills', '.it-skill')
+content = content.replace('Soul-Brews-Studio', 'cherdchu2mieng')
+content = content.replace('ORACLE_SKILLS', 'IT_SKILL')
+content = content.replace('ITINFOSV_VERSION', 'IT_SKILL_VERSION')
 
-# 2. Re-engineer Wrapper Logic to be clean and simple
-wrapper_logic = r'''install_bunx_wrapper() {
+# 2. Rebrand Banner and Metadata
+content = re.sub(r'echo "🔮 .*?"', 'echo "🔮 IT-Skill CLI Installer 🛡️🌊"', content)
+content = content.replace('v1.0.0', 'v1.0.1')
+
+# 3. ENTIRE BLOCK REPLACEMENT (Surgical Sweep)
+# Replace everything from the install method header to the install entry point
+start_marker = "# ── Install method: binary or bunx ─────────────────────────"
+end_marker = "# ── Install ─────────────────────────────────────────────────"
+
+start_idx = content.find(start_marker)
+end_idx = content.find(end_marker)
+
+if start_idx != -1 and end_idx != -1:
+    clean_logic = r'''# ── Install method: binary or bunx ─────────────────────────
+
+INSTALL_DIR="$HOME/.it-skill/bin"
+PKG_SPEC="it-skill@github:itinfosv/it-skill-cli#master"
+
+ensure_path() {
+  mkdir -p "$INSTALL_DIR"
+  local path_line="export PATH=\"$INSTALL_DIR:\$PATH\""
+  for rc in "$HOME/.zshrc" "$HOME/.bashrc" "$HOME/.profile"; do
+    if [ -f "$rc" ] && ! grep -q "it-skill/bin" "$rc"; then
+      echo "" >> "$rc"
+      echo "# IT-Skill CLI" >> "$rc"
+      echo "$path_line" >> "$rc"
+    fi
+  done
+  export PATH="$INSTALL_DIR:$PATH"
+}
+
+ensure_bun() {
+  if ! command -v bun &> /dev/null; then
+    echo "📦 Installing bun..."
+    curl -fsSL https://bun.sh/install | bash
+    export PATH="$HOME/.bun/bin:$PATH"
+  else
+    echo "✓ bun installed"
+  fi
+}
+
+install_bunx_wrapper() {
   ensure_bun
-
   echo "📦 Installing it-skill Bash wrapper..."
   mkdir -p "$INSTALL_DIR"
-  rm -f "$INSTALL_DIR/it-skill" # Force cleanup of 98MB binary
-
-  # Create a wrapper script that delegates to bunx
-  cat > "$INSTALL_DIR/it-skill" << WRAPPER
+  rm -f "$INSTALL_DIR/it-skill"
+  cat > "$INSTALL_DIR/it-skill" << 'WRAPPER'
 #!/bin/bash
 # IT-Skill CLI — bunx wrapper (v1.0.1)
-# Source: github.com/cherdchu2mieng/itinfosv-skill-cli
-exec bunx --bun ${PKG_SPEC} "\$@"
+# Source: github.com/itinfosv/it-skill-cli
+exec bunx --bun it-skill@github:itinfosv/it-skill-cli#master "$@"
 WRAPPER
   chmod +x "$INSTALL_DIR/it-skill"
   echo "✅ Wrapper installed: $INSTALL_DIR/it-skill"
   ensure_path
-}'''
+}
 
-# Replace the entire install_bunx_wrapper function
-content = re.sub(r'install_bunx_wrapper\(\) \{.*?\}', wrapper_logic, content, flags=re.DOTALL)
+'''
+    content = content[:start_idx] + clean_logic + content[end_idx:]
 
-# 3. Disable Binary install to enforce wrapper
-content = content.replace("elif try_binary_install; then", "elif false; then # Binary disabled per RFC")
+# 4. Update the actual install sequence calls
+content = content.replace('elif try_binary_install; then', 'elif false; then # Binary disabled per RFC')
 
 with open(install_sh_path, "w") as f:
     f.write(content)
 
-print("✅ install.sh fully rebranded.")
+print("✅ install.sh fully re-engineered via clean-sweep replacement.")

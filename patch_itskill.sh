@@ -81,18 +81,14 @@ if not os.path.exists(path):
     print(f"  ⚠️ Skipping: {path} not found")
     sys.exit(0)
 
-# Robust file type detection
 is_json = target_file.lower().endswith(".json")
-
 with open(path, "r") as f:
     content = f.read()
 
-# Hygiene: Strip legacy comment headers from ANY file that shouldn't have them
 if content.startswith("// @it-skill-patch:"):
-    lines = content.split("\n")
-    content = "\n".join(lines[1:]) if is_json else content
+    l = content.split("\n")
+    content = "\n".join(l[1:]) if is_json else content
 
-# Manifest Check
 if is_json:
     try:
         data = json.loads(content)
@@ -101,7 +97,6 @@ if is_json:
             print(f"  ✅ {tag} already present in JSON.")
             sys.exit(0)
     except:
-        # If corrupted, we proceed and try to fix it during injection
         pass
 else:
     manifest_match = re.search(r'// @it-skill-patch:.*', content)
@@ -116,7 +111,6 @@ if not os.path.exists(payload_path):
 with open(payload_path, "r") as f:
     payload = f.read().strip()
 
-# Injection
 new_content = content
 if mode == "replace_block":
     idx_start = content.find(start)
@@ -125,31 +119,28 @@ if mode == "replace_block":
         if idx_end != -1:
              new_content = content[:idx_start] + payload + content[idx_end + len(end):]
         else:
-             print(f"  ❌ Error: Block end anchor not found in {target_file}")
+             print(f"  ❌ Error: Block end anchor not found")
              sys.exit(1)
     else:
-        print(f"  ❌ Error: Block start anchor not found in {target_file}")
+        print(f"  ❌ Error: Block start anchor not found")
         sys.exit(1)
 elif mode == "replace_line":
     if start in content:
         new_content = content.replace(start, payload)
     else:
-        print(f"  ❌ Error: Line anchor not found in {target_file}")
+        print(f"  ❌ Error: Line anchor not found")
         sys.exit(1)
-else: # Default: insert before start
+else:
     if start in content:
         new_content = content.replace(start, payload + "\n" + start)
     else:
-        print(f"  ❌ Error: Anchor not found in {target_file}")
+        print(f"  ❌ Error: Anchor not found")
         sys.exit(1)
 
-# Manifest Management
 if is_json:
     try:
-        # Cleanup any leading comments that might have slipped in
         if new_content.strip().startswith("//"):
              new_content = "\n".join([l for l in new_content.split("\n") if not l.strip().startswith("//")])
-        
         data = json.loads(new_content)
         current_tags = data.get("it-skill-patch", "")
         if tag not in current_tags.split():
@@ -159,20 +150,20 @@ if is_json:
         print(f"  ❌ Error updating JSON manifest: {e}")
         sys.exit(1)
 else:
-    if "// @it-skill-patch:" in new_content:
-        lines = new_content.split("\n")
-        for i, line in enumerate(lines):
-            if line.startswith("// @it-skill-patch:"):
-                if tag not in line:
-                    lines[i] = line.rstrip() + f" {tag}"
-                break
-        new_content = "\n".join(lines)
+    lines = new_content.split("\n")
+    has_shebang = len(lines) > 0 and lines[0].startswith("#!")
+    patch_idx = -1
+    for i, line in enumerate(lines):
+        if line.startswith("// @it-skill-patch:"):
+            patch_idx = i
+            break
+    if patch_idx != -1:
+        if tag not in lines[patch_idx]:
+            lines[patch_idx] = lines[patch_idx].rstrip() + f" {tag}"
     else:
-        lines = new_content.split("\n")
-        if lines[0].startswith("#!"):
-            new_content = lines[0] + "\n" + f"// @it-skill-patch: {tag}" + "\n" + "\n".join(lines[1:])
-        else:
-            new_content = f"// @it-skill-patch: {tag}\n" + new_content
+        insert_pos = 1 if has_shebang else 0
+        lines.insert(insert_pos, f"// @it-skill-patch: {tag}")
+    new_content = "\n".join(lines)
 
 with open(path, "w") as f:
     f.write(new_content)
@@ -196,8 +187,6 @@ python3 "$SCRIPT_DIR/rebrand_final_readme.py" "$TARGET_PATH"
 
 # Install.sh Rebranding (Strict Mode)
 
-apply_payload "install.sh" "rebrand_install_sh_header@v1.0" "#!/bin/bash" "rebrand_install_sh_header@v1.0.pl" "replace_block" 'echo ""'
-apply_payload "install.sh" "rebrand_install_sh_paths@v1.0" 'INSTALL_DIR="$HOME/.oracle-skills/bin"' "rebrand_install_sh_paths@v1.0.pl" "replace_block" '  export PATH="$INSTALL_DIR:$PATH"'
 
 echo "🚀 Starting CR-ITSKILL-002 Execution..."
 
