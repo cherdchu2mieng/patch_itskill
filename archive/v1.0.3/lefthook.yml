@@ -1,0 +1,10 @@
+pre-commit:
+  commands:
+    update-table:
+      run: bun run scripts/update-readme-table.ts
+      stage_fixed: true
+    test:
+      run: bun test
+    skill-convention:
+      glob: 'src/skills/**/*.md'
+      run: bash scripts/check_skill_convention.sh
