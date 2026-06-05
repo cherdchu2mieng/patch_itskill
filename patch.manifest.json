@@ -1,28 +1,24 @@
 {
   "project": "IT-Skill CLI",
-  "current_active_version": "v1.0.0",
-  "timestamp": "2026-06-02T15:10:00Z",
+  "current_active_version": "v1.0.2",
+  "timestamp": "2026-06-05T09:15:00Z",
   "history": {
     "v1.0.0": {
       "description": "Genesis Release: Repository Migration and Rebranding",
-      "patch_type": "full_package",
-      "source_baseline": "ψ/learn/Soul-Brews-Studio/arra-oracle-skills-cli/origin/",
-      "features": {
-        "rebranding": {
-          "package_name": "it-skill-cli",
-          "binary_name": "it-skill",
-          "org": "itinfosv",
-          "tag": "[itinfosv]"
-        }
-      },
-      "v1.1.0": {
+      "patch_type": "full_package"
+    },
+    "v1.1.0": {
       "description": "Skill Integration: Porting Governance Skills",
+      "patch_type": "incremental"
+    },
+    "v1.0.2": {
+      "description": "Identity Separation and Private Repo Alignment",
       "patch_type": "incremental",
       "features": {
-        "skill_porting": [
-          "build-rfc", "build-patch", "close-rfc", "patch-forge"
-        ],
-        "profile_update": "src/profiles.ts"
+        "identity_rebrand": "CR-001",
+        "private_repo_fix": "CR-002",
+        "metadata_update": "CR-003",
+        "test_alignment": "CR-004"
       }
     }
   }
