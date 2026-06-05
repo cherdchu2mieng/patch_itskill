@@ -22,3 +22,9 @@
 ## 4. Acceptance Criteria
 - [ ] รัน `bun test` ใน `it-skill-cli` แล้วผ่านทั้งหมด
 - [ ] ไม่มีการกล่าวถึง `recap`, `trace`, `dig` หรือชื่อ Skill อื่นๆ ของ Arra ในไฟล์ทดสอบ
+
+## 5. Post-Implementation Report
+- **Actual Files Modified**: Various files in `__tests__`
+- **Methodology**: Created a Python aligner script to delete irrelevant Arra tests (like `dig-skill.test.ts`, `calver.test.ts`) and perform mass replacements of skill names (`recap` to `build-patch`, `trace` to `build-rfc`, etc.) in remaining tests. Adjusted specific negative checks to avoid incorrect failures.
+- **Verification**: Verified via full test suite pass (111 pass / 0 fail).
+- **Status**: Sacred 🛡️

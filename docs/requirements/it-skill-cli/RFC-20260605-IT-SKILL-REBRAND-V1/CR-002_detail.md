@@ -4,7 +4,7 @@
 ## 1. CR Information
 - **Parent RFC**: RFC-20260605-IT-SKILL-REBRAND-V1
 - **Target Module**: it-skill-cli (install.sh, wrapper)
-- **Status**: Pending
+- **Status**: Approved (Tested from human = Sacred)
 
 ## 2. Technical Scope
 - **Nature of Change**: Distribution Logic Fix
@@ -23,3 +23,8 @@
 ## 4. Acceptance Criteria
 - [ ] คำสั่ง `it-skill --version` หรือ `it-skill --help` สามารถทำงานได้โดยไม่ติด Error 404
 - [ ] `install.sh` สร้าง Wrapper ที่มีรูปแบบการเรียกใช้งานที่ถูกต้องสำหรับ Private Repo
+ort
+- **Actual Files Modified**: `install.sh`
+- **Methodology**: Replaced the `PKG_SPEC` to use `git+https://` to support accessing the private repository via Git. Also updated the wrapper generation script block.
+- **Verification**: Human verified the fix manually by running `it-skill --version` successfully from the system.
+- **Status**: Sacred 🛡️
