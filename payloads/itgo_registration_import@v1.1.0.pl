@@ -1,0 +1,1 @@
+import { registerItgo } from './commands/itgo.js';

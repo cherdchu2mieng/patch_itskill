@@ -1,0 +1,1 @@
+registerInstall(program, VERSION);

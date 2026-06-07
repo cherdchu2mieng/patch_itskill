@@ -1,0 +1,70 @@
+{
+  "project": "IT-Skill CLI",
+  "current_active_version": "v1.6.0",
+  "timestamp": "2026-06-07T16:30:00Z",
+  "history": {
+    "v1.0.0": {
+      "description": "Genesis Release: Repository Migration and Rebranding",
+      "patch_type": "full_package",
+      "source_baseline": "\u03c8/learn/Soul-Brews-Studio/arra-oracle-skills-cli/origin/",
+      "features": {
+        "rebranding": {
+          "package_name": "it-skill-cli",
+          "binary_name": "it-skill",
+          "org": "itinfosv",
+          "tag": "[itinfosv]"
+        }
+      }
+    },
+    "v1.1.0": {
+      "description": "itgo Infrastructure Manager Genesis",
+      "patch_type": "incremental",
+      "features": {
+        "itgo_scaffolding": "src/cli/commands/itgo.ts",
+        "itgo_registration": "src/cli/index.ts",
+        "itgo_profile_update": "src/profiles.ts"
+      }
+    },
+    "v1.2.0": {
+      "description": "itgo Fleet Management: Individual Refresh support",
+      "patch_type": "incremental",
+      "features": {
+        "itgo_refresh": "src/cli/commands/itgo.ts",
+        "refresh_logic": "src/cli/installer.ts"
+      }
+    },
+    "v1.3.0": {
+      "description": "itgo Fleet Health: Binary detection and environment status",
+      "patch_type": "incremental",
+      "features": {
+        "fleet_environment": "src/cli/commands/itgo.ts",
+        "health_helpers": "src/cli/fs-utils.ts"
+      }
+    },
+    "v1.4.0": {
+      "description": "itgo Advanced Governance: Robust health checks and Auto-backups",
+      "patch_type": "incremental",
+      "features": {
+        "robust_health": "src/cli/fs-utils.ts",
+        "auto_backups": "src/cli/installer.ts"
+      }
+    },
+    "v1.5.0": {
+      "description": "itgo Fleet Management: Cross-Agent Sync and Bootstrap Alignment",
+      "patch_type": "incremental",
+      "features": {
+        "agent_sync": "src/cli/commands/itgo.ts",
+        "bootstrap_alignment": "src/cli/commands/itgo.ts"
+      }
+    },
+    "v1.6.0": {
+      "description": "itgo Genesis Final: Consolidated Sovereign Management and Fleet Sync",
+      "patch_type": "incremental",
+      "features": {
+        "itgo_master": "src/cli/commands/itgo.ts",
+        "agent_sync": "src/cli/commands/itgo.ts",
+        "bootstrap_final": "src/cli/commands/itgo.ts"
+      }
+    }
+  }
+}

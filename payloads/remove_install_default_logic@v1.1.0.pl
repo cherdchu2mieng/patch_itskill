@@ -1,0 +1,2 @@
+  program
+    .command('install')

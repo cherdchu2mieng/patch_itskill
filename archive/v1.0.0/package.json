@@ -1,0 +1,62 @@
+{
+  "name": "it-skill-cli",
+  "version": "1.0.0",
+  "description": "IT-Skill CLI \u2014 Enterprise Governance and Skill Management for itinfosv",
+  "type": "module",
+  "bin": {
+    "it-skill": "./src/cli/index.ts"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "bun scripts/ensure-vfs-stub.ts && bun build src/cli/index.ts --outdir dist --target bun --minify",
+    "dev": "bun run src/cli/index.ts",
+    "test": "bun test __tests__/",
+    "compile": "bun scripts/compile.ts",
+    "calver": "bun scripts/calver.ts",
+    "version": "bun run compile && bun scripts/update-readme-table.ts && git add src/commands README.md",
+    "prepare": "lefthook install",
+    "prepublishOnly": "bun run compile && bun run build",
+    "clawhub": "bun scripts/clawhub-build.ts"
+  },
+  "keywords": [
+    "oracle",
+    "skills",
+    "claude-code",
+    "opencode",
+    "cursor",
+    "codex",
+    "ai-agents",
+    "soul-brews",
+    "cli",
+    "bun"
+  ],
+  "author": "itinfosv",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itinfosv/it-skill-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/itinfosv/it-skill-cli/issues"
+  },
+  "homepage": "https://github.com/itinfosv/it-skill-cli#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.6",
+    "@types/node": "^20.0.0",
+    "lefthook": "^2.0.15",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "commander": "^12.0.0",
+    "mqtt": "^5.14.1"
+  },
+  "skillTag": "[itinfosv]",
+  "it-skill-patch": "rebrand_package_json@v1.0"
+}

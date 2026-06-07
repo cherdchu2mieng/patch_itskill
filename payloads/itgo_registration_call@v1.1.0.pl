@@ -1,0 +1,1 @@
+registerItgo(program, VERSION);
